@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+ipython = "*"
+django = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+"beautifulsoup4" = "*"
+lxml = "*"
+requests = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.7"
