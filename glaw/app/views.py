@@ -16,7 +16,7 @@ from rest_framework.decorators import action, api_view, permission_classes, pars
 @parser_classes((JSONParser,))
 def query_posts(request):
     page = int(request.GET.get('page', 1))
-    limit = int(request.GET.get('limit', 20))
+    limit = int(request.GET.get('size', 10))
 
     posts, total = post_index(page=page, limit=limit)
     serializer = PostListSerializer(posts, many=True)
