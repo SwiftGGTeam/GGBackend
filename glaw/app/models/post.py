@@ -10,6 +10,7 @@ class Post(models.Model):
     title = models.CharField("文章标题", max_length=128, null=False, blank=False, unique=True)
     origin_title = models.CharField("原文标题", max_length=128, null=True, blank=True, unique=True)
     body = models.TextField("内容")
+    preface = models.TextField("前言", null=True, blank=True)
 
     # 原文作者
     author = models.CharField(verbose_name="作者", max_length=128)
@@ -29,7 +30,7 @@ class Post(models.Model):
 
     created_at = models.DateTimeField("创建时间", auto_now_add=True)
     updated_at = models.DateTimeField("上次修改时间", auto_now=True)
-    published_at = models.DateTimeField("译文发布时间", auto_now_add=True)
+    published_at = models.DateTimeField("译文发布时间")
     origin_at = models.DateTimeField("原文创建时间", auto_now=True)
 
     def __str__(self):

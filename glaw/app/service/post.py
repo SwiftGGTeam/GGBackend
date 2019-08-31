@@ -13,6 +13,8 @@ def index(page=1, limit=20):
     posts = Post.objects.all().order_by('-published_at')
     tot = len(posts)
     paginator = Paginator(posts, limit)
+    if paginator.num_pages < page:
+        return [], tot
     result = paginator.page(page)
     return list(result), tot
 

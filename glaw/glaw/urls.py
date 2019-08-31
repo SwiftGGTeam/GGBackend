@@ -21,11 +21,13 @@ from app.gateway import base as glaw_base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path(r'', include(('app.urls', 'app'), namespace='app'))
     # path('', include('app.urls')),
 ]
 
-app_urlpatterns = [
-    path(glaw_base.url_prefix('posts'), glaw_post.query_posts),
-]
+# app_urlpatterns = [
+#     path(glaw_base.url_prefix('posts'), glaw_post.query_posts),
+#     # path(glaw_base.url_prefix('post_spider'), glaw_post.posts_spider),
+# ]
 
-urlpatterns += app_urlpatterns
+# urlpatterns += app_urlpatterns
