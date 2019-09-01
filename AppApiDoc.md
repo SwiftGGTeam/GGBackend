@@ -16,7 +16,7 @@
 | page | 是 | 页数，默认为 1 |
 | size | 是 | 分页大小，默认为 10 |
 
-接口地址：`GET`
+接口地址：`GET` `http://api.swift.gg/app/posts`
 
 ```json
 {
@@ -105,7 +105,9 @@
 ```
 
 ### 文章详情
-接口地址：`GET`
+接口地址：`GET` `http://api.swift.gg/app/post/[:id]`
+
+例：http://api.swift.gg/app/post/486
 
 ```json
 {
