@@ -28,9 +28,12 @@ def query_posts(request):
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny, ))
 @parser_classes((JSONParser,))
-def query_post(request, post_id):
+def query_post(request):
     if request.method != 'GET':
         return Response(render_failure('Method Not Allowed'), status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    post_id = request.GET.get('id')
+    if post_id is None:
+        return Response(render_failure('Missing Query Param'), status=status.HTTP_400_BAD_REQUEST)
 
     try:
         post = Post.objects.get(id=post_id)

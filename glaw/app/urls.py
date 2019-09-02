@@ -6,5 +6,5 @@ from . import views
 
 urlpatterns = [
     url(r'^app/posts$', views.query_posts, name='posts'),
-    url(r'^app/post/(?P<post_id>\d+)$', views.query_post, name='post')
+    url(r'^app/post$', views.query_post, name='post')
 ]
