@@ -1,10 +1,10 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls import url
 
 from app.gateway import post as glaw_post
 from . import views
 
 urlpatterns = [
-    url(r'^app/posts$', views.query_posts, name='posts'),
-    url(r'^app/post$', views.query_post, name='post')
+    re_path(r'^app/posts$', views.query_posts),
+    re_path(r'^app/post/(?P<post_id>\d+)$', views.query_post),
 ]
