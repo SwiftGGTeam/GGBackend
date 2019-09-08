@@ -10,6 +10,11 @@ class Product(models.Model):
     origin_price = models.IntegerField(verbose_name="原价", blank=False, null=False)
     banner_display = models.BooleanField(verbose_name="是否展示在 banner 位")
 
+    is_available = models.BooleanField(verbose_name="商品是否有效")
+    is_published = models.BooleanField(verbose_name="商品是否已发布")
+    unavailable_reason = models.CharField("商品无效原因", max_length=128)
+
+    source = models.CharField("商品来源", max_length=56)
     preface = models.CharField("简介", max_length=256)
     body = models.TextField("内容", null=False)
 
