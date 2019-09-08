@@ -25,7 +25,7 @@ SECRET_KEY = '592u5qg!n2_e-t6kj4q0qpf4vh%n_%(p=6c!-(0g@q@%y@77ed'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', 'api.swift.gg']
 
 
 # Application definition
