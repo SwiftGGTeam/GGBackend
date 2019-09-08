@@ -36,7 +36,6 @@ def query_post(request, post_id):
         post = Post.objects.get(id=post_id)
         serializer = PostSerializer(post, many=False)
         resp_data = serializer.data
-        print(resp_data)
         return Response(render_success(resp_data), status=status.HTTP_200_OK)
     except Post.DoesNotExist:
         return Response(render_failure('没有找到相关文章'), status=status.HTTP_200_OK)
