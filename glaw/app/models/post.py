@@ -11,6 +11,7 @@ class Post(models.Model):
     origin_title = models.CharField("原文标题", max_length=128, null=True, blank=True, unique=True)
     body = models.TextField("内容")
     preface = models.TextField("前言", null=True, blank=True)
+    thumbnail = models.URLField(verbose_name="缩略图", max_length=128, blank=True, null=True)
 
     # 原文作者
     author = models.CharField(verbose_name="作者", max_length=128)

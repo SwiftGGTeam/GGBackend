@@ -8,6 +8,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view, permission_classes, parser_classes
 
+from app.core import post_crawl
+
 # Create your views here.
 
 
@@ -41,6 +43,15 @@ def query_post(request, post_id):
         return Response(render_failure('没有找到相关文章'), status=status.HTTP_200_OK)
 
     return Response(render_failure('404 Not Found'), status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny, ))
+@parser_classes((JSONParser,))
+def crawl_post(request):
+    res = post_crawl.executor_post()
+    post_crawl.bulk_update(res)
+    return Response(render_success(res), status=status.HTTP_200_OK)
 
 
 def render_page_resp(page, limit, total, items):

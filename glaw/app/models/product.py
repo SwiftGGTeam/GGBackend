@@ -10,13 +10,13 @@ class Product(models.Model):
     origin_price = models.IntegerField(verbose_name="原价", blank=False, null=False)
     banner_display = models.BooleanField(verbose_name="是否展示在 banner 位")
 
-    is_available = models.BooleanField(verbose_name="商品是否有效")
-    is_published = models.BooleanField(verbose_name="商品是否已发布")
-    unavailable_reason = models.CharField("商品无效原因", max_length=128)
+    is_available = models.BooleanField(verbose_name="商品是否有效", default=True)
+    is_published = models.BooleanField(verbose_name="商品是否已发布", default=False)
+    unavailable_reason = models.CharField("商品无效原因", max_length=128, blank=True, null=True)
 
-    source = models.CharField("商品来源", max_length=56)
-    preface = models.CharField("简介", max_length=256)
-    body = models.TextField("内容", null=False)
+    source = models.CharField("商品来源", max_length=56, blank=True, null=True)
+    preface = models.CharField("简介", max_length=256, blank=True, null=True)
+    body = models.TextField("内容")
 
     thumbnail_url = models.URLField(verbose_name="缩略图链接", max_length=128, blank=False, null=False)
     purchase_url = models.URLField(verbose_name="购买链接", max_length=128, blank=False, null=False)

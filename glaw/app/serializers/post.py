@@ -5,6 +5,7 @@ from rest_framework import serializers, viewsets
 class PostListSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField(many=False)
     publishDate = serializers.DateTimeField(source='published_at', format="%Y-%m-%d")
+    imageURL = serializers.URLField(source='thumbnail')
 
     class Meta:
         model = Post
@@ -12,6 +13,7 @@ class PostListSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'preface',
+            'imageURL',
             'category',
             'publishDate'
         )

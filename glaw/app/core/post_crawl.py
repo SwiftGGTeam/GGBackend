@@ -5,13 +5,15 @@ from datetime import datetime
 import re
 import json
 import requests
+from bs4 import BeautifulSoup
+from markdown import markdown
 
 POST_LIST_API_URL = "https://api.github.com/repos/SwiftGGTeam/source/contents/_posts?ref=master"
 
-TEST_TOKEN = "adc33ddb0505ece9a9fdb3b58327871fa49c6a15"
+TEST_TOKEN = ""
 
 
-def excutor_post() -> list:
+def executor_post() -> list:
     # TEST_TOKEN = input("private token: ")
     # 请求列表
     headers = {
@@ -39,7 +41,8 @@ def excutor_post() -> list:
 
 def resolve_header(raw: str) -> dict:
     # 模拟 raw 文件
-    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20151029_list-comprehensions-and-performance-with-swift.md")
+    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20190709_sets-in-swift.md")
+    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20190415_core-bluetooth.md")
     # raw = str(r.content, encoding="utf-8")
     info = {}
     preface = ''
@@ -50,22 +53,25 @@ def resolve_header(raw: str) -> dict:
             continue
         # print(line)
         # 匹配 title
-        title_re_test = re.match(r'^title:.*?"(.+?)".*?$', line)
+        title_re_test = re.match(r'^.*?title:.*?"(.+?)".*?$', line)
+        title_re_test2 = re.match(r'^.*?title:(.+?)$', line)
         if title_re_test:
             info['title'] = title_re_test.group(1)
+        elif title_re_test2:
+            info['title'] = title_re_test2.group(1).strip()
 
         # 匹配时间
-        date_re_test = re.match(r'^date:.*?(\d{4}-\d{1,2}-\d{1,2}).*?$', line)
+        date_re_test = re.match(r'^.*?date:.*?(\d{4}-\d{1,2}-\d{1,2}).*?$', line)
         if date_re_test:
             info['date'] = date_re_test.group(1)
 
         # 匹配 permalink
-        category_re_test = re.match(r'^permalink:(.+)$', line)
+        category_re_test = re.match(r'^.*?permalink:(.+)$', line)
         if category_re_test:
             info['permalink'] = category_re_test.group(1).strip()
 
         # 匹配 categories
-        categories_re_test = re.match(r'^categories:.*?\[(.*?)\].*?$', line)
+        categories_re_test = re.match(r'^.*?categories:.*?\[(.*?)\].*?$', line)
         if categories_re_test:
             categories = categories_re_test.group(1).split(',')
             if len(categories) > 0 and len(categories[0]) > 0:
@@ -74,7 +80,13 @@ def resolve_header(raw: str) -> dict:
         # 匹配 more
         if re.match(r'^\s*<\s*!-+\s*more\s*-+\s*>\s*$', line):
             # 移除最后一个 \n
-            info['preface'] = preface[:-1]
+            text, url = get_preface_and_image_url(preface[:-1])
+            print(text)
+            info['preface'] = text
+            if url.startswith('/'):
+                url = 'https://swift.gg' + url
+                print("updated final url: " + url)
+            info['thumbnail'] = url
             break
 
         if preface_start:
@@ -95,6 +107,30 @@ def resolve_header(raw: str) -> dict:
                                                    d4=info['permalink'])
 
     return info
+
+
+# 从字符串 text 中获取所有 image 标签里的 url
+def get_image_urls(text):
+    pattern = re.compile(r'(?:!\[.*\]\((.*?)\))')
+    urls = pattern.findall(text)
+    return urls
+
+
+# 从输入的 Markdown 文件里获取无格式的前言和前言中的图片 url
+def get_preface_and_image_url(preface: str):
+    # 从 rawPreface 里获取 url，只要第一个
+    urls = get_image_urls(preface)
+    for url in urls:
+        print('[url]:', url)
+    image_url = ''
+    if len(urls) > 0:
+        image_url = urls[0]
+
+    # rawPreface 去掉 Markdown 标签
+    html = markdown(preface)
+    preface = ''.join(BeautifulSoup(html, 'html.parser').findAll(text=True))
+    preface = preface.replace('\n', '')
+    return preface, image_url
 
 
 def resolve_body(raw) -> dict:
@@ -127,44 +163,42 @@ def ptr_post_dict(post: dict):
         print('category: %s' % post['category'])
 
 
-def bulk_insert(res):
-    flags = {}
-    list_to_insert = list()
-    for post_dic in res:
-        if not 'title' in post_dic.keys():
-            continue
-        if post_dic['title'] in flags.keys():
-            continue
-        flags[post_dic['title']] = True
-        list_to_insert.append(make_post(post_dic))
-    # BD
-    Post.objects.bulk_create(list_to_insert)
-
-
-def bulk_update(res):
+def bulk_update(posts: list):
     """
     爬虫更新策略
-    :param res: 传入 excutor_post 爬虫结果
+    :param posts: 传入 executor_post 爬虫结果
     :return:
     """
-    flags = {}
+    list_to_insert = list()
     list_to_update = list()
-    for post_dic in res:
-        if not 'title' in post_dic.keys():
-            continue
-        if post_dic['title'] in flags.keys():
-            continue
-        flags[post_dic['title']] = True
-        list_to_update.append(make_post(post_dic))
-    Post.objects.bulk_update(list_to_update, ['body', 'category', 'preface'])
+
+    inserted_titles = set()
+
+    for post_dict in posts:
+        if 'title' in post_dict.keys():
+            title = post_dict['title']
+            try:
+                post = Post.objects.get(title=title)
+                update(post, post_dict)
+                list_to_update.append(post)
+            except Post.DoesNotExist:
+                if title in inserted_titles:
+                    print('existed title: %s' % title)
+                    continue
+
+                inserted_titles.add(title)
+                post = Post(title=title)
+                update(post, post_dict)
+                list_to_insert.append(post)
+        else:
+            print('match failed:')
+            print(post_dict)
+
+    Post.objects.bulk_create(list_to_insert)
+    Post.objects.bulk_update(list_to_update, ['preface', 'thumbnail'])
 
 
-def make_post(post_dict: dict):
-    try:
-        post = Post.objects.get(title=post_dict['title'])
-    except Post.DoesNotExist:
-        post = Post(title=post_dict['title'])
-
+def update(post: Post, post_dict: dict):
     if 'date' in post_dict.keys():
         post.published_at = datetime.strptime(post_dict['date'], "%Y-%m-%d")
     if 'html_url' in post_dict.keys():
@@ -178,6 +212,8 @@ def make_post(post_dict: dict):
         post.category = category
     if 'preface' in post_dict.keys():
         post.preface = post_dict['preface']
+    if 'thumbnail' in post_dict.keys():
+        post.thumbnail = post_dict['thumbnail']
 
     post.body = post_dict['body']
     return post
