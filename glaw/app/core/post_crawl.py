@@ -42,23 +42,28 @@ def executor_post() -> list:
 def resolve_header(raw: str) -> dict:
     # 模拟 raw 文件
     # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20190709_sets-in-swift.md")
-    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20190415_core-bluetooth.md")
+    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20160623_xcode-extensions.md")
+    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20161212_swift-holy-war-comments-are-not-an-anti-pattern.md")
+    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20181029_object-detection-with-yolo.md")
+    # r = requests.get("https://raw.githubusercontent.com/SwiftGGTeam/source/master/_posts/20151012_how-to-test-uialertcontroller-in-swift.md")
     # raw = str(r.content, encoding="utf-8")
     info = {}
     preface = ''
     preface_start = False
 
     for line in raw.split("\n"):
+        line = line.strip()
         if not line:
             continue
         # print(line)
         # 匹配 title
-        title_re_test = re.match(r'^.*?title:.*?"(.+?)".*?$', line)
-        title_re_test2 = re.match(r'^.*?title:(.+?)$', line)
+        title_re_test = re.match(r'^title:.*?"(.+?)"$', line)
         if title_re_test:
             info['title'] = title_re_test.group(1)
-        elif title_re_test2:
-            info['title'] = title_re_test2.group(1).strip()
+        else:
+            title_re_test = re.match(r'^title:(.*?)$', line)
+            if title_re_test:
+                info['title'] = title_re_test.group(1).strip()
 
         # 匹配时间
         date_re_test = re.match(r'^.*?date:.*?(\d{4}-\d{1,2}-\d{1,2}).*?$', line)

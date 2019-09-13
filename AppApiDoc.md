@@ -26,78 +26,88 @@
         "pageBean": {
             "page": 1,
             "size": 10,
-            "total": 510
+            "total": 262
         },
         "items": [
             {
-                "id": 486,
+                "id": 238,
+                "title": "千呼万唤始出来：SwiftWebUI",
+                "preface": "六月初，Apple 在 WWDC 2019 上发布了 SwiftUI。SwiftUI 是一个“跨平台的”、“声明式”框架，用于构建 tvOS、macOS、watchOS 和 iOS 上的用户界面。SwiftWebUI 则将它带到了 Web 平台上✔️。",
+                "imageURL": "",
+                "category": "The Always Right Institute",
+                "publishDate": "2019-09-12"
+            },
+            {
+                "id": 237,
+                "title": "面向协议教程",
+                "preface": "对于开发者来说，复杂性是最大的敌人，因此我会去了解那些可以帮助我管理混乱的新技术。Swift 中的“面向协议编程”（POP）是最近（至少自2015年以来）引起广泛关注的“热门”方法之一。在这里我们将使用 Swift 4。在我自己编写代码时，发现 POP 很有前途。更吸引人的是，Apple 宣称 “Swift 的核心是面对协议的”。我想在一个正式的报告中分享关于 POP 的经验，一篇关于这个新兴技术清晰而简洁的教程。我将解释关键概念，提供大量代码示例，无法避免的将 POP 和 OOP （面向对象编程）进行比较，并对面向流行编程（FOP?）的人群所声称的 POP 是解决所有问题的灵丹妙药这一说法进行泼冷水。面向协议编程是一个很棒的新工具，值得添加到你现有的编程工具库中，但是没有什么可以代替那些经久不衰的基本功，就像将大的函数拆分成若干个小函数，将大的代码文件拆分成若干个小的文件，使用有意义的变量名，在敲代码之前花时间设计架构，合理而一致的使用间距和缩进，将相关的属性和行为分配到类和结构体中 - 遵循这些常识可以让世界变得不同。如果你编写的代码无法被同事理解，那它就是无用的代码。学习和采用像 POP 这样的新技术并不需要绝对的唯一。POP 和 OOP 不仅可以共存，还可以互相协助。对于大多数开发者包括我自己，掌握 POP 需要时间和耐心。因为 POP 真的很重要，所以我将教程分成两篇文章。本文将主要介绍和解释 Swift 的协议和 POP。第二篇文章将深入研究 POP 的高级应用方式（比如从协议开始构建应用程序的功能），范型协议，从引用类型到值类型转变背后的动机，列举 POP 的利弊，列举 OOP 的利弊，比较 OOP 和 POP，阐述为什么“Swift 是面向协议的”，并且深入研究一个被称为 “局部推理” 的概念，它被认为是通过使用 POP 增强的。这次我们只会粗略涉及一些高级主题。  ",
+                "imageURL": "",
+                "category": "POP",
+                "publishDate": "2019-09-05"
+            },
+            {
+                "id": 236,
                 "title": "Swift 关键字",
-                "preface": "有句话之前我提过，今天还想再说一次。那就是打铁还需自身硬。对于自身能力的严格要求，可以帮助实现我们所有梦寐以求的东西。\n说起来可能有些消极，知识毕竟是永远学不完的。不论如何，今天 [我们先来学习一下 Swift 中的每一个关键字](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html)（V3.0.1），在介绍每个关键字的时候，同时会附带一段代码加以说明。\n在这些关键字之中，会有你熟悉或者不熟悉的部分。但为了最好的阅读和学习体验，我把它们全部列出来了。文章篇幅有些长，你准备好了么？\n让我们现在就开始吧。",
+                "preface": "有句话之前我提过，今天还想再说一次。那就是打铁还需自身硬。对于自身能力的严格要求，可以帮助实现我们所有梦寐以求的东西。说起来可能有些消极，知识毕竟是永远学不完的。不论如何，今天 我们先来学习一下 Swift 中的每一个关键字（V3.0.1），在介绍每个关键字的时候，同时会附带一段代码加以说明。在这些关键字之中，会有你熟悉或者不熟悉的部分。但为了最好的阅读和学习体验，我把它们全部列出来了。文章篇幅有些长，你准备好了么？让我们现在就开始吧。",
+                "imageURL": "",
                 "category": "swiftjectivec",
                 "publishDate": "2019-08-22"
             },
             {
-                "id": 485,
+                "id": 235,
                 "title": "给 UIView 来点烟花",
                 "preface": "",
+                "imageURL": "",
                 "category": "Tomasz Szulc",
                 "publishDate": "2019-08-14"
             },
             {
-                "id": 484,
+                "id": 234,
                 "title": "Bundles and Packages",
-                "preface": "在这个给予的季节，让我们停下脚步，思考一个现代计算机系统赐予我们的最棒的礼物：抽象。\n在数百万 CPU 晶体管、SSD 扇区和 LCD 像素共同协作下，全球数十亿人能够日常使用计算机和移动设备而对此全然不知。这一切都应归功于像文件，目录，应用和文档这样的抽象。\n这周的 NSHipster，我们将讨论苹果平台上两个重要的抽象：包与包裹。🎁",
+                "preface": "在这个给予的季节，让我们停下脚步，思考一个现代计算机系统赐予我们的最棒的礼物：抽象。在数百万 CPU 晶体管、SSD 扇区和 LCD 像素共同协作下，全球数十亿人能够日常使用计算机和移动设备而对此全然不知。这一切都应归功于像文件，目录，应用和文档这样的抽象。这周的 NSHipster，我们将讨论苹果平台上两个重要的抽象：包与包裹。🎁",
+                "imageURL": "",
                 "category": "Swift",
                 "publishDate": "2019-07-19"
             },
             {
-                "id": 483,
+                "id": 233,
                 "title": "Swift 中的集合（Set）",
-                "preface": "集合（Set）是 Swift 集合类型（collection types）之一，集合用来存储类型相同且没有确定顺序唯一的值。你可以将集合想象成一盒台球：它们在颜色和数量上独一无二，但在盒内是无序的。\n![](/img/articles/Sets-in-Swift/billiard.jpg1562643187.9223473)",
+                "preface": "集合（Set）是 Swift 集合类型（collection types）之一，集合用来存储类型相同且没有确定顺序唯一的值。你可以将集合想象成一盒台球：它们在颜色和数量上独一无二，但在盒内是无序的。",
+                "imageURL": "https://swift.gg/img/articles/Sets-in-Swift/billiard.jpg1562643187.9223473",
                 "category": "thomashanning",
                 "publishDate": "2019-07-09"
             },
             {
-                "id": 482,
+                "id": 232,
                 "title": "PhotoKit 的数据模型",
-                "preface": "在 iOS 系统中，[PhotoKit 框架](https://developer.apple.com/documentation/photokit) 不仅被系统的照片 App 所使用，同时它也为开发人员访问设备的照片库提供了接口支持。而它的底层则是 [Core Data](https://developer.apple.com/documentation/coredata) 实现的。",
+                "preface": "在 iOS 系统中，PhotoKit 框架 不仅被系统的照片 App 所使用，同时它也为开发人员访问设备的照片库提供了接口支持。而它的底层则是 Core Data 实现的。",
+                "imageURL": "",
                 "category": "PhotoKit",
                 "publishDate": "2019-07-01"
             },
             {
-                "id": 481,
+                "id": 231,
                 "title": "将 Swift 序列切分为头部和尾部",
-                "preface": "函数式编程语言的一个常用范式是把一个列表切分为头部（第一个元素）和尾部（其余元素）。在 Haskell 中，[x:xs](https://en.wikibooks.org/wiki/Haskell/Pattern_matching) 会匹配非空列表，将头部绑定给变量 x，尾部绑定给 xs。\n[Swift 不是一门函数式编程语言](https://academy.realm.io/posts/tryswift-rob-napier-swift-legacy-functional-programming/)。既没有内置的 `List` 类型，也没有集合的特定匹配语法。<a href=\"#foot1\" id=\"1\"><sup>[1]</sup></a>",
+                "preface": "函数式编程语言的一个常用范式是把一个列表切分为头部（第一个元素）和尾部（其余元素）。在 Haskell 中，x:xs 会匹配非空列表，将头部绑定给变量 x，尾部绑定给 xs。Swift 不是一门函数式编程语言。既没有内置的 List 类型，也没有集合的特定匹配语法。[1]",
+                "imageURL": "",
                 "category": "Ole Begemann",
                 "publishDate": "2019-06-24"
             },
             {
-                "id": 480,
+                "id": 230,
                 "title": "使用 Swift 实现基于堆的优先级队列",
-                "preface": "在计算机科学中，有很多问题可以通过将底层数据结构用优先级队列实现来改善算法的时间复杂度。其中 Dijkstra 的最短路径算法便是一个例子，该算法使用了优先级队列来在图中搜索两个顶点间的最短路径。\n不幸的是，Swift 的标准库中并没有提供优先级队列的默认实现。所以我们将会研究如何自行实现基于堆的优先级队列。",
+                "preface": "在计算机科学中，有很多问题可以通过将底层数据结构用优先级队列实现来改善算法的时间复杂度。其中 Dijkstra 的最短路径算法便是一个例子，该算法使用了优先级队列来在图中搜索两个顶点间的最短路径。不幸的是，Swift 的标准库中并没有提供优先级队列的默认实现。所以我们将会研究如何自行实现基于堆的优先级队列。",
+                "imageURL": "",
                 "category": "AppCoda",
                 "publishDate": "2019-05-06"
             },
             {
-                "id": 479,
+                "id": 229,
                 "title": "Swift 5 字符串插值-简介",
-                "preface": " `StringInterpolation` 协议最初的设计效率低下又不易扩展，为了在后续的版本中能够将其彻底重构，Swift 4 中将该协议标记为废弃。即将在 Swift 5 中亮相的 [SE-0228](https://github.com/apple/swift-evolution/blob/master/proposals/0228-fix-expressiblebystringinterpolation.md) 提案介绍了一种新的 `StringInterpolation` 设计，使得 String 有了更大的潜能。",
+                "preface": "StringInterpolation 协议最初的设计效率低下又不易扩展，为了在后续的版本中能够将其彻底重构，Swift 4 中将该协议标记为废弃。即将在 Swift 5 中亮相的 SE-0228 提案介绍了一种新的 StringInterpolation 设计，使得 String 有了更大的潜能。",
+                "imageURL": "",
                 "category": "Crunchy Development",
                 "publishDate": "2019-04-22"
-            },
-            {
-                "id": 478,
-                "title": "在 iOS 11 中使用 Core Bluetooth",
-                "preface": "作为 iOS 开发，我们十分清楚人们都喜欢互通性。我们喜欢通过无线设备与其他人进行沟通这一点是显而易见的。最近，我们开始希望能够与那些曾经被认为是独立的普通设备进行*通信*。我们开始喜欢，甚至是期望，部分无线设备可以收集并且分析自己的数据（通常称为“可穿戴设备”）。许多设备已经成为我们生活里的一部分，还为还有一个专门的术语来描述它：“Internet of Things” 或者 “IoT”（物联网）。现在地球上有数十亿的无线通讯设备。在这篇教程中，我们将聚焦 IoT 其中的一部分：蓝牙。  \n我将说明蓝牙技术背后的基本概念，以及：  \n - 展示如何精通蓝牙方向的软件开发，从而为你提供巨大的职业机遇  \n - 提醒你必须去确认在发布一个使用蓝牙技术的应用时是否需要通过“资格审查”  \n - 给你提供 Apple 的[***Core Bluetooth***](https://developer.apple.com/documentation/corebluetooth) 框架概述 ([**也可以参阅这里**](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257-CH1-SW1))  \n - 最后，带领你使用 Swift 4 并通过 *Core Bluetooth* 和一个蓝牙设备来开发一款用于监控心率的 iOS 应用程序\n> 提示：注意跟随阅读文章中包含的超链接。对于开发者这是重要的资料，它确保你完全理解蓝牙的工作方式以及苹果是如何支持蓝牙这种技术的。",
-                "category": "appcoda",
-                "publishDate": "2019-04-15"
-            },
-            {
-                "id": 477,
-                "title": "Void",
-                "preface": "从 [我们第一篇关于 Objective-C 中的 `nil` 的文章](https://nshipster.com/nil/) 到 [最近对 Swift 中 `Never` 类型的一瞥](https://nshipster.com/never/)，“不存在”一直是 NSHipster 讨论的话题。但今天的文章可能是它们当中充斥着最多如 [恐怖留白](https://en.wikipedia.org/wiki/Horror_vacui) 般细节的 —— 因为我们将目光聚焦在了 Swift 中的 `Void` 上。",
-                "category": "Swift",
-                "publishDate": "2019-02-25"
             }
         ]
     }
