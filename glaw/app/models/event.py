@@ -13,7 +13,6 @@ class Event(models.Model):
     start_date = models.DateField("活动开始时间", null=False, blank=False)
     end_date = models.DateField("活动结束时间", null=False, blank=False)
 
-    body = models.TextField("详情")
     event_pic = models.URLField(verbose_name="活动封面图", max_length=128, blank=True, null=True)
 
     def __str__(self):
