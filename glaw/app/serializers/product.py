@@ -24,6 +24,7 @@ class ProductSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
     originPrice = serializers.SerializerMethodField()
     detail = serializers.CharField(source='body')
+    purchaseURL = serializers.URLField(source='purchase_url')
 
     class Meta:
         model = Product
@@ -32,7 +33,8 @@ class ProductSerializer(serializers.ModelSerializer):
             'name',
             'price',
             'originPrice',
-            'detail'
+            'detail',
+            'purchaseURL'
         )
 
     def get_price(self, obj):
