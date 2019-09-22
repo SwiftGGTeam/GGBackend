@@ -23,3 +23,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = '商品'
+        verbose_name_plural = verbose_name
+
+        index_together = [
+            ['name'],
+        ]

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from app.serializers.post import PostListSerializer, PostSerializer
-from app.models import Post
+from app.serializers.product import ProductListSerializer, ProductSerializer
+from app.models import Post, Product
 from app.service.post import index as post_index
 
 from rest_framework import viewsets, status, permissions
@@ -34,15 +35,18 @@ def query_post(request, post_id):
     if request.method != 'GET':
         return Response(render_failure('Method Not Allowed'), status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+    res_data = render_failure('404 Not Found')
+    res_status = status.HTTP_404_NOT_FOUND
     try:
         post = Post.objects.get(id=post_id)
         serializer = PostSerializer(post, many=False)
-        resp_data = serializer.data
-        return Response(render_success(resp_data), status=status.HTTP_200_OK)
+        res_data = render_success(serializer.data)
+        res_status = status.HTTP_200_OK
     except Post.DoesNotExist:
-        return Response(render_failure('没有找到相关文章'), status=status.HTTP_200_OK)
-
-    return Response(render_failure('404 Not Found'), status=status.HTTP_404_NOT_FOUND)
+        res_data = render_failure('没有找到相关文章')
+        res_status = status.HTTP_200_OK
+    finally:
+        return Response(res_data, status=res_status)
 
 
 # @api_view(['GET'])
@@ -52,6 +56,47 @@ def query_post(request, post_id):
 #     res = post_crawl.executor_post()
 #     post_crawl.bulk_update(res)
 #     return Response(render_success(res), status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny, ))
+@parser_classes((JSONParser,))
+def query_products(request):
+    if request.method != 'GET':
+        return Response(render_failure('Method Not Allowed'), status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    banner_products = ProductListSerializer(
+        Product.objects.all().filter(banner_display=True).order_by('-id'), many=True
+    ).data
+    list_products = ProductListSerializer(
+        Product.objects.all().filter(banner_display=False).order_by('-id'), many=True
+    ).data
+    data = {
+        'banner': banner_products,
+        'list': list_products
+    }
+    return Response(render_success(data), status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny, ))
+@parser_classes((JSONParser,))
+def query_product(request, product_id):
+    if request.method != 'GET':
+        return Response(render_failure('Method Not Allowed'), status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    res_data = render_failure('404 Not Found')
+    res_status = status.HTTP_404_NOT_FOUND
+    try:
+        product = Product.objects.get(id=product_id)
+        serializer = ProductSerializer(product, many=False)
+        res_data = render_success(serializer.data)
+        res_status = status.HTTP_200_OK
+    except Product.DoesNotExist:
+        res_data = render_failure('没有找到相关商品')
+        res_status = status.HTTP_200_OK
+    finally:
+        return Response(res_data, status=res_status)
 
 
 def render_page_resp(page, limit, total, items):
