@@ -13,6 +13,10 @@ class Event(models.Model):
     start_date = models.DateField("活动开始时间", null=False, blank=False)
     end_date = models.DateField("活动结束时间", null=False, blank=False)
 
+    is_available = models.BooleanField(verbose_name="是否有效", default=True)
+    is_published = models.BooleanField(verbose_name="是否已发布", default=False)
+    unavailable_reason = models.CharField("无效原因", max_length=128, blank=True, null=True)
+
     event_pic = models.URLField(verbose_name="活动封面图", max_length=128, blank=True, null=True)
 
     def __str__(self):
