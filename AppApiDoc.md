@@ -6,6 +6,8 @@
 - [商品](#商品)
     - [商品列表](#商品列表)
     - [商品详情](#商品详情)
+- [活动](#活动)
+    - [活动列表](#活动列表)
 
 ## 通用请求返回格式
 ```json
@@ -198,6 +200,42 @@
         "originPrice": 99.0,
         "detail": "WWDC 2019 上 Apple 公布了声明式全新界面框架 SwiftUI，以及配套的响应式编程框架 Combine。对于 Apple 平台的开发者来说，这是一次全新的转变和挑战。本书通过几个具体的实战例子，由浅入深介绍了 SwiftUI 和 Combine 框架的使用方式及核心思想，帮助您顺利步入令人激动的 Apple 开发新时代。\r\n\r\n![](https://img.yzcdn.cn/upload_files/2019/06/12/FvXOyH6W9ifPV9ILwjGemNB9yp6l.png!730x0.jpg)",
         "purchaseURL": "https://detail.youzan.com/show/goods?alias=1ygghkmhvccf2"
+    }
+}
+```
+
+## 活动
+### 活动列表
+接口地址：`GET` `http://api.swift.gg/app/events`
+
+```json
+{
+    "success": true,
+    "message": "",
+    "results": {
+        "pageBean": {
+            "page": 1,
+            "size": 10,
+            "total": 2
+        },
+        "items": [
+            {
+                "name": "2019 力扣杯全国秋季编程大赛",
+                "state": "开放报名中",
+                "date": "2019-09-24 ~ 2019-09-25",
+                "place": "线上活动",
+                "imageURL": "https://activity-static.segmentfault.com/265/003/265003973-5d76265be94cc_big",
+                "registerURL": "https://leetcode-cn.com/contest/season/2019-fall/"
+            },
+            {
+                "name": "DDD领域驱动设计峰会",
+                "state": "开放报名中",
+                "date": "2019-11-28 ~ 2019-11-30",
+                "place": "北京市丽都皇冠假日酒店",
+                "imageURL": "https://activity-static.segmentfault.com/341/320/3413202100-5d4299e9be6b7_big",
+                "registerURL": "http://ddd-china.com"
+            }
+        ]
     }
 }
 ```
