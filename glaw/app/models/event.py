@@ -26,8 +26,4 @@ class Event(models.Model):
         verbose_name = '活动'
         verbose_name_plural = verbose_name
 
-        unique_together = (
-            ('name')
-        )
-
         index_together = []

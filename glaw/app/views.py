@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from app.serializers.post import PostListSerializer, PostSerializer
 from app.serializers.product import ProductListSerializer, ProductSerializer
+from app.serializers.event import EventListSerializer
 from app.models import Post, Product
 from app.service.post import index as post_index
+from app.service.event import index as event_index
 
 from rest_framework import viewsets, status, permissions
 from rest_framework.parsers import JSONParser
@@ -97,6 +99,20 @@ def query_product(request, product_id):
         res_status = status.HTTP_200_OK
     finally:
         return Response(res_data, status=res_status)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny, ))
+@parser_classes((JSONParser,))
+def query_events(request):
+    page = int(request.GET.get('page', 1))
+    limit = int(request.GET.get('size', 10))
+
+    events, total = event_index(page=page, limit=limit)
+    serializer = EventListSerializer(events, many=True)
+
+    resp_data = render_page_resp(page, limit, total, serializer.data)
+    return Response(render_success(resp_data), status=status.HTTP_200_OK)
 
 
 def render_page_resp(page, limit, total, items):
