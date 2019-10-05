@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from app.serializers.post import PostListSerializer, PostSerializer
 from app.serializers.product import ProductListSerializer, ProductSerializer
 from app.serializers.event import EventListSerializer
 from app.models import Post, Product
@@ -14,41 +13,6 @@ from rest_framework.decorators import action, api_view, permission_classes, pars
 # from app.core import post_crawl
 
 # Create your views here.
-
-
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny, ))
-@parser_classes((JSONParser,))
-def query_posts(request):
-    page = int(request.GET.get('page', 1))
-    limit = int(request.GET.get('size', 10))
-
-    posts, total = post_index(page=page, limit=limit)
-    serializer = PostListSerializer(posts, many=True)
-
-    resp_data = render_page_resp(page, limit, total, serializer.data)
-    return Response(render_success(resp_data), status=status.HTTP_200_OK)
-
-
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny, ))
-@parser_classes((JSONParser,))
-def query_post(request, post_id):
-    if request.method != 'GET':
-        return Response(render_failure('Method Not Allowed'), status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-    res_data = render_failure('404 Not Found')
-    res_status = status.HTTP_404_NOT_FOUND
-    try:
-        post = Post.objects.get(id=post_id)
-        serializer = PostSerializer(post, many=False)
-        res_data = render_success(serializer.data)
-        res_status = status.HTTP_200_OK
-    except Post.DoesNotExist:
-        res_data = render_failure('没有找到相关文章')
-        res_status = status.HTTP_200_OK
-    finally:
-        return Response(res_data, status=res_status)
 
 
 # @api_view(['GET'])

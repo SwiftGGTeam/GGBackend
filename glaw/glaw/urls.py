@@ -16,18 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from app.gateway import post as glaw_post
-from app.gateway import base as glaw_base
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'', include(('app.urls', 'app'), namespace='app'))
-    # path('', include('app.urls')),
+    path(r'app/', include(('app.urls', 'app'), namespace='app'))
 ]
-
-# app_urlpatterns = [
-#     path(glaw_base.url_prefix('posts'), glaw_post.query_posts),
-#     # path(glaw_base.url_prefix('post_spider'), glaw_post.posts_spider),
-# ]
-
-# urlpatterns += app_urlpatterns
