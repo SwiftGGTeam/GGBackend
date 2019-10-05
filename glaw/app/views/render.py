@@ -5,6 +5,12 @@ from app.models import PageBean
 
 
 def page_success(page_bean: PageBean, items: list):
+    """
+    分页请求响应成功
+    :param page_bean: 分页数据
+    :param items: 需要返回的结果
+    :return: HTTP 响应，状态码为 200
+    """
     resp_data = {
         'pageBean': page_bean.to_json(),
         'items': items,
@@ -12,8 +18,13 @@ def page_success(page_bean: PageBean, items: list):
     return Response(__success_data(resp_data), status=status.HTTP_200_OK)
 
 
-def success(results):
-    return Response(__success_data(results), status=status.HTTP_200_OK)
+def success(result):
+    """
+    单组数据请求响应成功
+    :param result: 需要返回的结果
+    :return: HTTP 响应，状态码为 200
+    """
+    return Response(__success_data(result), status=status.HTTP_200_OK)
 
 
 def __success_data(results):
@@ -29,19 +40,20 @@ def __success_data(results):
     }
 
 
-def not_found(reason: str):
-    return Response(__failure_data(reason), status=status.HTTP_404_NOT_FOUND)
-
-
 def parameters_illegal():
+    """
+    非法的请求参数
+    :return: HTTP 响应，状态码为 400
+    """
     return Response(__failure_data('Parameters illegal'), status=status.HTTP_400_BAD_REQUEST)
 
 
-def method_not_allowed():
-    return Response(__failure_data('Method Not Allowed'), status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-
 def failure(reason: str):
+    """
+    单组数据请求响应失败
+    :param reason: 失败的原因
+    :return: HTTP 响应，状态码为 200
+    """
     return Response(__failure_data(reason), status=status.HTTP_200_OK)
 
 

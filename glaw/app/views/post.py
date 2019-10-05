@@ -14,9 +14,6 @@ from app.models import Post, PageBean
 @permission_classes((permissions.AllowAny,))
 @parser_classes((JSONParser,))
 def post_list(request):
-    if request.method != 'GET':
-        return render.method_not_allowed()
-
     try:
         page = int(request.GET.get('page', 1))
         limit = int(request.GET.get('size', 10))
@@ -40,9 +37,6 @@ def post_list(request):
 @permission_classes((permissions.AllowAny,))
 @parser_classes((JSONParser,))
 def post_detail(request, post_id):
-    if request.method != 'GET':
-        return render.method_not_allowed()
-
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
